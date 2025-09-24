@@ -13,7 +13,8 @@
   <link rel="icon" href="/favicon.ico" />
   <style>
     :root{
-      --bg:#0b1220; --panel:#0f172a; --panel-2:#111827; --txt:#e5e7eb; --muted:#9ca3af; --acc:#60a5fa; --acc-2:#34d399; --ring:#2563eb;
+      --bg:#0b1220; --panel:#0f172a; --panel-2:#111827; --txt:#e5e7eb; --muted:#9ca3af;
+      --acc:#60a5fa; --acc-2:#34d399; --ring:#2563eb;
       --card:#111827; --border:#1f2937; --header-h:64px;
     }
     *{box-sizing:border-box}
@@ -42,10 +43,22 @@
     }
     .scrolled header{box-shadow:0 8px 24px rgba(0,0,0,.25)}
     header .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+
+    /* 브랜드 영역 (LinkedIn 아이콘 + 이름) */
     .brand{display:flex;gap:12px;align-items:center}
     .brand strong{font-size:15px;letter-spacing:.2px}
+    .brand .icon-btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:32px;height:32px;border-radius:8px;
+      border:1px solid var(--border);background:#0b1220;color:#cbd5e1;
+      transition:transform .12s ease, background .12s ease, color .12s ease, border-color .12s ease;
+    }
+    .brand .icon-btn:hover{transform:translateY(-1px);background:#111827;color:#fff;border-color:#263241}
+    .brand .icon-btn svg{width:18px;height:18px;display:block}
+
     nav a{margin:0 10px;color:var(--txt);opacity:.9;font-size:14px;white-space:nowrap}
     nav a:hover{opacity:1}
+    .nav-wrap{display:flex;gap:8px;align-items:center}
     .cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--acc),#8b5cf6);color:white;border:0;padding:10px 14px;border-radius:12px;box-shadow:0 10px 24px rgba(99,102,241,.25);cursor:pointer}
     .cta:focus{outline:2px solid var(--ring);outline-offset:3px}
 
@@ -94,8 +107,6 @@
     @media (prefers-reduced-motion: reduce){
       .reveal{opacity:1;transform:none;transition:none}
     }
-
-    .nav-wrap{display:flex;gap:8px;align-items:center}
   </style>
 
   <script type="application/ld+json">
@@ -104,8 +115,8 @@
     "@type":"Person",
     "name":"Sangyeon Lee",
     "jobTitle":"Systems Administrator / HPC & Kubernetes",
-    "url":"https://example.com",
-    "sameAs":["https://www.linkedin.com/in/sangyeon-lee"],
+    "url":"https://leesangyeon1.github.io",
+    "sameAs":["https://www.linkedin.com/in/sangyeon-lee-434325289"],
     "knowsAbout":["HPC","Kubernetes","Linux","Slurm","InfiniBand","Networking","Ansible"]
   }
   </script>
@@ -114,9 +125,19 @@
   <header id="top">
     <div class="wrap container">
       <div class="brand">
-        <!-- 아이콘 제거됨 -->
+        <!-- LinkedIn 아이콘 (좌측) -->
+        <a class="icon-btn" href="https://www.linkedin.com/in/sangyeon-lee-434325289"
+           target="_blank" rel="noreferrer noopener"
+           aria-label="LinkedIn (opens in a new tab)" title="LinkedIn">
+          <span class="sr-only">LinkedIn</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+          </svg>
+        </a>
+        <!-- 아이콘 오른쪽에 이름 -->
         <strong>Sangyeon Lee</strong>
       </div>
+
       <nav class="nav-wrap" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
@@ -141,9 +162,9 @@
       </div>
       <div class="panel reveal">
         <div class="grid">
-          <div class="card reveal"><h3>Clusters</h3><p>Slurm • MPI • Kubernetes</p></div>
-          <div class="card reveal"><h3>IT</h3><p>Active Directory • Window Server • Trouble shooting </p></div>
-          <div class="card reveal"><h3>Networking</h3><p>Cisco • Mellanox • VLAN</p></div>
+          <div class="card reveal"><h3>Clusters</h3><p>• Slurm • MPI • Kubernetes</p></div>
+          <div class="card reveal"><h3>IT</h3><p>• Active Directory • Windows Server • Troubleshooting</p></div>
+          <div class="card reveal"><h3>Networking</h3><p>• Cisco • Mellanox • VLAN</p></div>
         </div>
       </div>
     </div>
@@ -162,7 +183,7 @@
         <h3>HPC Cluster Technician · UCO <span class="muted">— 2024–Present</span></h3>
         <ul class="muted">
           <li>Administrate university Linux-based supercomputer server architectures and infrastructure.</li>
-          <li>Implemented Kubernetes to cluster to support containerized workloads.</li>
+          <li>Implemented Kubernetes cluster to support containerized workloads.</li>
           <li>Developed expertise in high-performance computing (HPC) and cluster management.</li>
           <li>Configured and maintained Cisco and Mellanox network switches, including InfiniBand connectivity for high-speed data transfer.</li>
         </ul>
@@ -171,13 +192,12 @@
       <div class="item">
         <h3>Student Information Technician · UCO <span class="muted">— 2024–Present</span></h3>
         <ul class="muted">
-          <li>Trained new technicians on ticketing systems, Active Directory, device imaging, troubleshooting, and hardware/software support through hands-on projects..</li>
+          <li>Trained new technicians on ticketing systems, Active Directory, device imaging, troubleshooting, and hardware/software support through hands-on projects.</li>
           <li>Provided IT hardware maintenance and troubleshooting for university departments.</li>
           <li>Diagnosed and resolved issues related to Windows, macOS, and the campus network environment.</li>
         </ul>
       </div>
 
-      <!-- ✅ 군 경력 추가 -->
       <div class="item">
         <h3>Signal · Ground Operations Command <span class="muted">— 2020–2023</span></h3>
         <ul class="muted">
@@ -197,7 +217,7 @@
         <h3>HPC Node Communication Healthcheck</h3>
         <p class="muted">MPI+Slurm script that verifies node-to-node connectivity and surfaces failures fast.</p>
         <div class="stack"><span>MPI</span><span>Slurm</span><span>Bash</span></div>
-        <p style="margin-top:10px"><a href="https://lnkd.in/guZp7RHB">View write-up</a></p>
+        <p style="margin-top:10px"><a href="https://lnkd.in/guZp7RHB" target="_blank" rel="noreferrer noopener">View write-up</a></p>
       </article>
       <article class="card reveal">
         <h3>Kubernetes Dashboard Deployment</h3>
@@ -229,32 +249,32 @@
 
   <section id="contact" class="section container reveal">
     <h2>Contact</h2>
-    <p class="muted">Plese let me know if any questions.</p>
+    <p class="muted">Please let me know if you have any questions.</p>
 
-    <!-- ✅ formsubmit.co 사용: 아래 이메일을 본인 것으로 교체 -->
+    <!-- ✅ FormSubmit 사용: 토큰 방식 (이 토큰은 예시이며, 실제 받은 토큰을 사용하세요) -->
     <form class="panel" id="contactForm"
-          action="https://formsubmit.co/slee103@uco.edu"
+          action="https://formsubmit.co/ec16ab93f6211f5040b34f4a0f49f40a"
           method="POST" novalidate>
-      <!-- 기본 옵션 -->
+      <!-- 옵션: 스팸 방지 허니팟 -->
+      <input type="text" name="_honey" style="display:none">
+      <!-- 옵션: CAPTCHA 끄기/켜기 -->
       <input type="hidden" name="_captcha" value="true">
+      <!-- 옵션: 리다이렉트 (보낸 뒤 동일 페이지로) -->
+      <input type="hidden" name="_next" value="https://leesangyeon1.github.io/?sent=1">
+      <!-- 보기 좋은 테이블 템플릿 -->
       <input type="hidden" name="_template" value="table">
-      <!-- JS에서 동적으로 설정 -->
+      <!-- 메일 제목/회신 주소를 JS로 동적 설정 -->
       <input type="hidden" id="hsbj" name="_subject" value="">
       <input type="hidden" id="hreply" name="_replyto" value="">
-
-      <!-- 스팸 방지 -->
-      <input type="text" name="_honey" style="display:none">
 
       <div class="contact">
         <div>
           <label for="name">Name</label>
-          <!-- 사용자가 입력하는 이름: 제목으로 사용 -->
           <input id="name" name="name" placeholder="Your name" required />
         </div>
         <div>
           <label for="email">Email</label>
-          <!-- 사용자가 입력하는 이메일: Reply-To 로 사용 -->
-          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+          <input id="email" name="email" type="email" placeholder="your@example.com" required />
         </div>
       </div>
 
@@ -265,7 +285,7 @@
 
       <div class="btn-row" style="margin-top:12px">
         <button class="cta" type="submit">Send</button>
-        <a class="ghost" href="mailto:YOUREMAIL@example.com">Email instead</a>
+        <a class="ghost" href="mailto:slee103@uco.edu">Email instead</a>
       </div>
 
       <p id="formStatus" class="muted" role="status" aria-live="polite" style="margin-top:10px;"></p>
@@ -326,10 +346,21 @@
     const subjectHidden = document.getElementById('hsbj');
     const replyHidden = document.getElementById('hreply');
 
+    // URL 쿼리 ?sent=1 이면 전송 완료 배지 표시
+    const params = new URLSearchParams(location.search);
+    if (params.get('sent') === '1') {
+      const ok = document.createElement('div');
+      ok.textContent = '✅ Sent! Thanks — I will get back to you soon.';
+      ok.style.marginTop = '10px';
+      ok.className = 'muted';
+      document.querySelector('#contact .panel').appendChild(ok);
+      // 히스토리 정리 (새로고침 시 배지 반복 방지)
+      history.replaceState({}, '', location.pathname);
+    }
+
     if (form) {
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
-        // 동적 필드 세팅
         const name = (nameEl.value || '').trim();
         const email = (emailEl.value || '').trim();
         subjectHidden.value = name ? `${name} — Website Contact` : 'Website Contact';
@@ -344,8 +375,9 @@
             headers: { 'Accept': 'application/json' }
           });
           if (res.ok) {
-            form.reset();
-            status.textContent = '✅ Sent! Thanks — I will get back to you soon.';
+            // FormSubmit이 _next로 리다이렉트 처리하므로 여기선 대기
+            status.textContent = 'Redirecting…';
+            form.submit(); // 실제 제출
           } else {
             status.textContent = '⚠️ Failed to send. Please try again or use the email link.';
           }
