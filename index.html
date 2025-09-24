@@ -1,10 +1,9 @@
-
 <!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sangyeon Lee- IT Infrastructure & Systems Specialist</title>
+  <title>Sangyeon Lee — IT Infrastructure & Systems Specialist</title>
   <meta name="description" content="HPC & Kubernetes-focused Systems Administrator: clusters, Slurm, InfiniBand, automation, and reliable infrastructure." />
   <meta property="og:title" content="IT Infrastructure & Systems Specialist" />
   <meta property="og:description" content="HPC & Kubernetes-focused Systems Administrator: clusters, Slurm, InfiniBand, automation, and reliable infrastructure." />
@@ -15,21 +14,37 @@
   <style>
     :root{
       --bg:#0b1220; --panel:#0f172a; --panel-2:#111827; --txt:#e5e7eb; --muted:#9ca3af; --acc:#60a5fa; --acc-2:#34d399; --ring:#2563eb;
-      --card:#111827; --border:#1f2937;
+      --card:#111827; --border:#1f2937; --header-h:64px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     html{scroll-behavior:smooth}
-    body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#070b14 70%);color:var(--txt)}
+    body{
+      margin:0;
+      font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg),#070b14 70%);
+      color:var(--txt);
+      padding-top:var(--header-h); /* 고정 헤더 높이만큼 여백 */
+    }
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
     .container{max-width:1100px;margin:0 auto;padding:24px}
-    header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:rgba(11,18,32,.7);border-bottom:1px solid var(--border);z-index:100;transition:box-shadow .2s ease}
+
+    /* 고정 헤더 */
+    header{
+      position:fixed;left:0;right:0;top:0;
+      height:var(--header-h);
+      display:flex;align-items:center;
+      backdrop-filter:saturate(180%) blur(10px);
+      background:rgba(11,18,32,.7);
+      border-bottom:1px solid var(--border);
+      z-index:1000;transition:box-shadow .2s ease
+    }
     .scrolled header{box-shadow:0 8px 24px rgba(0,0,0,.25)}
     header .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
     .brand{display:flex;gap:12px;align-items:center}
     .brand strong{font-size:15px;letter-spacing:.2px}
-    nav a{margin:0 10px;color:var(--txt);opacity:.9;font-size:14px}
+    nav a{margin:0 10px;color:var(--txt);opacity:.9;font-size:14px;white-space:nowrap}
     nav a:hover{opacity:1}
     .cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--acc),#8b5cf6);color:white;border:0;padding:10px 14px;border-radius:12px;box-shadow:0 10px 24px rgba(99,102,241,.25);cursor:pointer}
     .cta:focus{outline:2px solid var(--ring);outline-offset:3px}
@@ -65,11 +80,11 @@
 
     .footer{padding:32px 24px;text-align:center;color:#94a3b8}
     .btn-row{display:flex;gap:10px;flex-wrap:wrap}
-    .ghost{background:transparent;border:1px solid var(--border);color:var(--txt);border-radius:12px;padding:9px 14px}
+    .ghost{background:transparent;border:1px solid var(--border);color:#fff;border-radius:12px;padding:9px 14px}
 
     .contact{display:grid;grid-template-columns:1fr 1fr;gap:18px}
     @media (max-width:900px){.contact{grid-template-columns:1fr}}
-    input,textarea{width:100%;padding:12px 14px;background:#0b1220;border:1px solid var(--border);border-radius:12px;color:var(--txt)}
+    input,textarea{width:100%;padding:12px 14px;background:#0b1220;border:1px solid var(--border);border-radius:12px;color:#e5e7eb}
     textarea{min-height:120px;resize:vertical}
     label{font-size:14px;color:#cbd5e1}
 
@@ -80,7 +95,6 @@
       .reveal{opacity:1;transform:none;transition:none}
     }
 
-    /* Mobile nav (optional minimal tweak) */
     .nav-wrap{display:flex;gap:8px;align-items:center}
   </style>
 
@@ -118,7 +132,7 @@
     <div class="container">
       <div class="reveal">
         <span class="tag">HPC • Kubernetes • Linux</span>
-        <h1>Sangyeon Lee- IT Infrastructure & Systems Specialist</h1>
+        <h1>Sangyeon Lee — IT Infrastructure & Systems Specialist</h1>
         <p class="muted">I design, build, and care for reliable compute infrastructure: from HPC clusters (Slurm, MPI, InfiniBand) to Kubernetes platforms and secure Linux servers. I like turning messy systems into fast, well-documented, and automated ones.</p>
         <div class="btn-row" style="margin-top:10px;">
           <a class="cta" href="#projects">See Projects</a>
@@ -137,12 +151,13 @@
 
   <section id="about" class="section container reveal">
     <h2>About</h2>
-    <p class="muted">Junior Computer science-Information Technology major focused on systems and infrastructure. I’ve worked as an HPC Cluster Technician and Student Information Technician, supporting cluster expansion, job scheduling, and end-user workflows. I document thoroughly and prefer scripts for repeatability.</p>
+    <p class="muted">Junior Computer Science – Information Technology major focused on systems and infrastructure. I’ve worked as an HPC Cluster Technician and Student Information Technician, supporting cluster expansion, job scheduling, and end-user workflows. I document thoroughly and prefer scripts for repeatability.</p>
   </section>
 
   <section id="experience" class="section container reveal">
     <h2>Experience</h2>
     <div class="timeline">
+
       <div class="item">
         <h3>HPC Cluster Technician · UCO <span class="muted">— 2024–Present</span></h3>
         <ul class="muted">
@@ -151,13 +166,25 @@
           <li>Troubleshot networking (VLANs, OOB/IPMI), container runtimes, and BIND DNS.</li>
         </ul>
       </div>
+
       <div class="item">
         <h3>Student Information Technician · UCO <span class="muted">— 2024–Present</span></h3>
         <ul class="muted">
-          <li>Managed servers and inventory; wrote K8s and scripts to reduce manual work.</li>
+          <li>Managed servers and inventory; wrote KBs and scripts to reduce manual work.</li>
           <li>Supported users across Linux, macOS, and Windows environments.</li>
         </ul>
       </div>
+
+      <!-- ✅ 군 경력 추가 -->
+      <div class="item">
+        <h3>Signal · Ground Operations Command <span class="muted">— 2020–2023</span></h3>
+        <ul class="muted">
+          <li>Ensured seamless and reliable node connections for military operations.</li>
+          <li>Operated advanced military communication devices.</li>
+          <li>Maintained communication centers and combat field communication stations.</li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -201,51 +228,47 @@
 
   <section id="contact" class="section container reveal">
     <h2>Contact</h2>
-    <p class="muted">
-      Plese let me know if you have any question
-    </p>
+    <p class="muted">Plese let me know if any questions.</p>
 
-    <!-- ✅ 방법 1: formsubmit.co (계정 없이 바로 수신) -->
-    <!-- 아래 YOUREMAIL@example.com 을 실제 본인 이메일로 교체하세요 -->
+    <!-- ✅ formsubmit.co 사용: 아래 이메일을 본인 것으로 교체 -->
     <form class="panel" id="contactForm"
-          action="https://formsubmit.co/YOUREMAIL@example.com"
+          action="https://formsubmit.co/slee103@uco.edu"
           method="POST" novalidate>
-      <!-- 권장: 자동응답, 스팸 방지, 리다이렉트 옵션 -->
+      <!-- 기본 옵션 -->
       <input type="hidden" name="_captcha" value="true">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_subject" value="New message from your website">
-      <!-- 성공시 같은 페이지에서 알림을 띄우므로 _next 불필요 -->
+      <!-- JS에서 동적으로 설정 -->
+      <input type="hidden" id="hsbj" name="_subject" value="">
+      <input type="hidden" id="hreply" name="_replyto" value="">
 
-      <!-- Honeypot -->
+      <!-- 스팸 방지 -->
       <input type="text" name="_honey" style="display:none">
 
       <div class="contact">
         <div>
           <label for="name">Name</label>
+          <!-- 사용자가 입력하는 이름: 제목으로 사용 -->
           <input id="name" name="name" placeholder="Your name" required />
         </div>
         <div>
           <label for="email">Email</label>
+          <!-- 사용자가 입력하는 이메일: Reply-To 로 사용 -->
           <input id="email" name="email" type="email" placeholder="you@example.com" required />
         </div>
       </div>
+
       <div style="margin-top:12px">
         <label for="msg">Message</label>
         <textarea id="msg" name="message" placeholder="How can I help?" required></textarea>
       </div>
+
       <div class="btn-row" style="margin-top:12px">
         <button class="cta" type="submit">Send</button>
         <a class="ghost" href="mailto:YOUREMAIL@example.com">Email instead</a>
       </div>
+
       <p id="formStatus" class="muted" role="status" aria-live="polite" style="margin-top:10px;"></p>
     </form>
-
-    <!--
-    ✅ 방법 2: Formspree 사용 시
-    <form class="panel" action="https://formspree.io/f/your-id" method="POST">
-      ...
-    </form>
-    -->
   </section>
 
   <footer class="footer">
@@ -258,15 +281,15 @@
     // Copyright year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    // Add shadow to header on scroll
-    const root = document.documentElement;
+    // 헤더 그림자
     const onScroll = () => {
       if (window.scrollY > 8) document.body.classList.add('scrolled');
       else document.body.classList.remove('scrolled');
     };
-    onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive:true });
 
-    // IntersectionObserver for reveal animations
+    // 섹션 리빌
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (!prefersReduced && 'IntersectionObserver' in window) {
       const obs = new IntersectionObserver((entries)=>{
@@ -282,25 +305,35 @@
       document.querySelectorAll('.reveal').forEach(el=>el.classList.add('show'));
     }
 
-    // Smooth anchor focus for accessibility
+    // 앵커 접근성 포커스
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
+      a.addEventListener('click', ()=>{
         const id = a.getAttribute('href').slice(1);
         const target = document.getElementById(id);
         if (target) {
-          // Let CSS smooth-scroll handle movement; ensure focus after
           setTimeout(()=>target.setAttribute('tabindex','-1'), 0);
           setTimeout(()=>target.focus({preventScroll:true}), 600);
         }
       });
     });
 
-    // AJAX submit for contact form (shows inline success/error)
+    // ✅ 폼 전송 전 동적 설정: Name → Subject, Email → Reply-To
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
+    const nameEl = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const subjectHidden = document.getElementById('hsbj');
+    const replyHidden = document.getElementById('hreply');
+
     if (form) {
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
+        // 동적 필드 세팅
+        const name = (nameEl.value || '').trim();
+        const email = (emailEl.value || '').trim();
+        subjectHidden.value = name ? `${name} — Website Contact` : 'Website Contact';
+        replyHidden.value = email;
+
         status.textContent = 'Sending…';
         const data = new FormData(form);
         try {
