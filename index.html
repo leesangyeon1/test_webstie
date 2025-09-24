@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Meet Sangyeon Lee — Your Next Systems Administrator</title>
+  <title>Meet Sangyeon Lee — IT Infrastructure & Systems Specialist</title>
   <meta name="description" content="HPC & Kubernetes-focused Systems Administrator: clusters, Slurm, InfiniBand, automation, and reliable infrastructure." />
-  <meta property="og:title" content="Meet Sangyeon Lee — Your Next Systems Administrator" />
+  <meta property="og:title" content="IT Infrastructure & Systems Specialist" />
   <meta property="og:description" content="HPC & Kubernetes-focused Systems Administrator: clusters, Slurm, InfiniBand, automation, and reliable infrastructure." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/assets/preview.png" />
@@ -18,32 +18,35 @@
     }
     *{box-sizing:border-box}
     html,body{height:100%}
+    html{scroll-behavior:smooth}
     body{margin:0;font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#070b14 70%);color:var(--txt)}
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
-    .container{max-width:1080px;margin:0 auto;padding:24px}
-    header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:rgba(11,18,32,.6);border-bottom:1px solid var(--border);z-index:50}
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:saturate(180%) blur(10px);background:rgba(11,18,32,.7);border-bottom:1px solid var(--border);z-index:100;transition:box-shadow .2s ease}
+    .scrolled header{box-shadow:0 8px 24px rgba(0,0,0,.25)}
     header .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
     .brand{display:flex;gap:12px;align-items:center}
-    .brand img{width:40px;height:40px;border-radius:12px;border:1px solid var(--border)}
-    .brand strong{font-size:15px}
-    nav a{margin:0 10px;color:var(--txt);opacity:.9}
+    .brand strong{font-size:15px;letter-spacing:.2px}
+    nav a{margin:0 10px;color:var(--txt);opacity:.9;font-size:14px}
     nav a:hover{opacity:1}
     .cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,var(--acc),#8b5cf6);color:white;border:0;padding:10px 14px;border-radius:12px;box-shadow:0 10px 24px rgba(99,102,241,.25);cursor:pointer}
     .cta:focus{outline:2px solid var(--ring);outline-offset:3px}
 
     .hero{padding:80px 24px 48px;border-bottom:1px solid var(--border)}
-    .hero .container{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center}
-    .hero h1{font-size:40px;line-height:1.15;margin:0 0 16px}
-    .hero p{color:var(--muted);margin:0 0 18px}
-    .tag{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:13px;margin-right:8px}
+    .hero .container{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .hero h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 16px}
+    .hero p{color:var(--muted);margin:0 0 18px;font-size:clamp(14px,2vw,18px)}
+    .tag{display:inline-block;padding:6px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:12px;margin-right:8px;white-space:nowrap}
     .panel{background:linear-gradient(180deg,var(--panel),var(--panel-2));border:1px solid var(--border);border-radius:18px;padding:18px}
 
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    @media (max-width:900px){.hero .container{grid-template-columns:1fr}.grid{grid-template-columns:1fr}}
+    @media (max-width:1024px){.hero .container{grid-template-columns:1fr}}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.grid{grid-template-columns:1fr}}
 
     .section{padding:48px 24px;border-bottom:1px solid var(--border)}
-    .section h2{margin:0 0 16px;font-size:26px}
+    .section h2{margin:0 0 16px;font-size:clamp(22px,3vw,28px)}
     .muted{color:var(--muted)}
     .chips{display:flex;flex-wrap:wrap;gap:10px}
     .chip{padding:6px 10px;background:#0b1220;border:1px solid var(--border);border-radius:999px;font-size:13px;color:#d1d5db}
@@ -68,10 +71,22 @@
     input,textarea{width:100%;padding:12px 14px;background:#0b1220;border:1px solid var(--border);border-radius:12px;color:var(--txt)}
     textarea{min-height:120px;resize:vertical}
     label{font-size:14px;color:#cbd5e1}
+
+    /* ---- Scroll reveal ---- */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1;transform:translateY(0)}
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1;transform:none;transition:none}
+    }
+
+    /* Mobile nav (optional minimal tweak) */
+    .nav-wrap{display:flex;gap:8px;align-items:center}
   </style>
+
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org", "@type":"Person",
+    "@context":"https://schema.org",
+    "@type":"Person",
     "name":"Sangyeon Lee",
     "jobTitle":"Systems Administrator / HPC & Kubernetes",
     "url":"https://example.com",
@@ -81,57 +96,57 @@
   </script>
 </head>
 <body>
-  <header>
+  <header id="top">
     <div class="wrap container">
       <div class="brand">
-        <img src="/assets/avatar.jpg" alt="Sangyeon Lee" />
+        <!-- 아이콘 제거됨 -->
         <strong>Sangyeon Lee</strong>
       </div>
-      <nav>
+      <nav class="nav-wrap" aria-label="Primary">
         <a href="#about">About</a>
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
+        <a class="cta" href="#contact" aria-label="Contact Sangyeon">Contact</a>
       </nav>
-      <a class="cta" href="#contact" aria-label="Contact Sangyeon">Contact</a>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <div>
+      <div class="reveal">
         <span class="tag">HPC • Kubernetes • Linux</span>
         <h1>Meet Sangyeon Lee — Your Next Systems Administrator</h1>
-        <p class="muted">I design, build, and care for reliable compute infrastructure: from HPC clusters (Slurm, MPI, InfiniBand) to Kubernetes platforms and secure Linux servers. I like turning messy systems into fast, well‑documented, and automated ones.</p>
+        <p class="muted">I design, build, and care for reliable compute infrastructure: from HPC clusters (Slurm, MPI, InfiniBand) to Kubernetes platforms and secure Linux servers. I like turning messy systems into fast, well-documented, and automated ones.</p>
         <div class="btn-row" style="margin-top:10px;">
           <a class="cta" href="#projects">See Projects</a>
           <a class="ghost" href="/Sangyeon_Lee_Resume.pdf">Download Résumé</a>
         </div>
       </div>
-      <div class="panel">
+      <div class="panel reveal">
         <div class="grid">
-          <div class="card"><h3>Clusters</h3><p>Warewulf • Slurm • MPI • OFED</p></div>
-          <div class="card"><h3>Kubernetes</h3><p>containerd • CNI • Dashboards</p></div>
-          <div class="card"><h3>Networking</h3><p>VLANs • BIND DNS • IB</p></div>
+          <div class="card reveal"><h3>Clusters</h3><p>Warewulf • Slurm • MPI • OFED</p></div>
+          <div class="card reveal"><h3>Kubernetes</h3><p>containerd • CNI • Dashboards</p></div>
+          <div class="card reveal"><h3>Networking</h3><p>VLANs • BIND DNS • IB</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="about" class="section container">
+  <section id="about" class="section container reveal">
     <h2>About</h2>
-    <p class="muted">Junior Computer science-Information Technology major focused on systems and infrastructure. I’ve worked as an HPC Cluster Technician and Student Information Technician, supporting cluster expansion, job scheduling, and end‑user workflows. I document thoroughly and prefer scripts for repeatability.</p>
+    <p class="muted">Junior Computer science-Information Technology major focused on systems and infrastructure. I’ve worked as an HPC Cluster Technician and Student Information Technician, supporting cluster expansion, job scheduling, and end-user workflows. I document thoroughly and prefer scripts for repeatability.</p>
   </section>
 
-  <section id="experience" class="section container">
+  <section id="experience" class="section container reveal">
     <h2>Experience</h2>
     <div class="timeline">
       <div class="item">
         <h3>HPC Cluster Technician · UCO <span class="muted">— 2024–Present</span></h3>
         <ul class="muted">
           <li>Expanded and maintained the “Buddy” supercomputer with Warewulf, Slurm, and InfiniBand.</li>
-          <li>Built MPI connectivity health‑checks and job scripts; improved reliability and docs.</li>
+          <li>Built MPI connectivity health-checks and job scripts; improved reliability and docs.</li>
           <li>Troubleshot networking (VLANs, OOB/IPMI), container runtimes, and BIND DNS.</li>
         </ul>
       </div>
@@ -145,21 +160,21 @@
     </div>
   </section>
 
-  <section id="projects" class="section container">
+  <section id="projects" class="section container reveal">
     <h2>Selected Projects</h2>
     <div class="grid">
-      <article class="card">
+      <article class="card reveal">
         <h3>HPC Node Communication Healthcheck</h3>
-        <p class="muted">MPI+Slurm script that verifies node‑to‑node connectivity and surfaces failures fast.</p>
+        <p class="muted">MPI+Slurm script that verifies node-to-node connectivity and surfaces failures fast.</p>
         <div class="stack"><span>MPI</span><span>Slurm</span><span>Bash</span></div>
-        <p style="margin-top:10px"><a href="https://lnkd.in/guZp7RHB">View write‑up</a></p>
+        <p style="margin-top:10px"><a href="https://lnkd.in/guZp7RHB">View write-up</a></p>
       </article>
-      <article class="card">
+      <article class="card reveal">
         <h3>Kubernetes Dashboard Deployment</h3>
         <p class="muted">Hardened dashboard with RBAC, service accounts, and namespaced access.</p>
         <div class="stack"><span>K8s</span><span>RBAC</span><span>containerd</span></div>
       </article>
-      <article class="card">
+      <article class="card reveal">
         <h3>BIND Authoritative + Caching Split</h3>
         <p class="muted">Documented and deployed secure DNS with SELinux, views, and zone hygiene.</p>
         <div class="stack"><span>BIND9</span><span>SELinux</span><span>DNS</span></div>
@@ -167,7 +182,7 @@
     </div>
   </section>
 
-  <section id="skills" class="section container">
+  <section id="skills" class="section container reveal">
     <h2>Skills</h2>
     <div class="chips" aria-label="Skills list">
       <span class="chip">Linux (RHEL/Alma)</span>
@@ -183,10 +198,26 @@
     </div>
   </section>
 
-  <section id="contact" class="section container">
+  <section id="contact" class="section container reveal">
     <h2>Contact</h2>
-    <p class="muted">궁금한 점이나 협업 제안은 아래로 메시지 주세요. (또는 <a href="mailto:you@example.com">이메일</a>)</p>
-    <form class="panel" action="https://formspree.io/f/your-id" method="POST">
+    <p class="muted">
+      궁금한 점이나 협업 제안은 아래로 메시지 주세요. 제출하면 이메일로 전달됩니다.
+    </p>
+
+    <!-- ✅ 방법 1: formsubmit.co (계정 없이 바로 수신) -->
+    <!-- 아래 YOUREMAIL@example.com 을 실제 본인 이메일로 교체하세요 -->
+    <form class="panel" id="contactForm"
+          action="https://formsubmit.co/YOUREMAIL@example.com"
+          method="POST" novalidate>
+      <!-- 권장: 자동응답, 스팸 방지, 리다이렉트 옵션 -->
+      <input type="hidden" name="_captcha" value="true">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_subject" value="New message from your website">
+      <!-- 성공시 같은 페이지에서 알림을 띄우므로 _next 불필요 -->
+
+      <!-- Honeypot -->
+      <input type="text" name="_honey" style="display:none">
+
       <div class="contact">
         <div>
           <label for="name">Name</label>
@@ -203,16 +234,91 @@
       </div>
       <div class="btn-row" style="margin-top:12px">
         <button class="cta" type="submit">Send</button>
-        <a class="ghost" href="mailto:you@example.com">Email instead</a>
+        <a class="ghost" href="mailto:YOUREMAIL@example.com">Email instead</a>
       </div>
+      <p id="formStatus" class="muted" role="status" aria-live="polite" style="margin-top:10px;"></p>
     </form>
+
+    <!--
+    ✅ 방법 2: Formspree 사용 시
+    <form class="panel" action="https://formspree.io/f/your-id" method="POST">
+      ...
+    </form>
+    -->
   </section>
 
   <footer class="footer">
     <div class="container">
-      © <span id="y"></span> Sangyeon Lee • Built with vanilla HTML/CSS • <a href="#">Back to top</a>
+      © <span id="y"></span> Sangyeon Lee  • <a href="#top">Back to top</a>
     </div>
   </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+
+  <script>
+    // Copyright year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Add shadow to header on scroll
+    const root = document.documentElement;
+    const onScroll = () => {
+      if (window.scrollY > 8) document.body.classList.add('scrolled');
+      else document.body.classList.remove('scrolled');
+    };
+    onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+
+    // IntersectionObserver for reveal animations
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if (e.isIntersecting) {
+            e.target.classList.add('show');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    } else {
+      document.querySelectorAll('.reveal').forEach(el=>el.classList.add('show'));
+    }
+
+    // Smooth anchor focus for accessibility
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const target = document.getElementById(id);
+        if (target) {
+          // Let CSS smooth-scroll handle movement; ensure focus after
+          setTimeout(()=>target.setAttribute('tabindex','-1'), 0);
+          setTimeout(()=>target.focus({preventScroll:true}), 600);
+        }
+      });
+    });
+
+    // AJAX submit for contact form (shows inline success/error)
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+    if (form) {
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        status.textContent = 'Sending…';
+        const data = new FormData(form);
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+          if (res.ok) {
+            form.reset();
+            status.textContent = '✅ Sent! Thanks — I will get back to you soon.';
+          } else {
+            status.textContent = '⚠️ Failed to send. Please try again or use the email link.';
+          }
+        } catch (err) {
+          status.textContent = '⚠️ Network error. Please try again or use the email link.';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
