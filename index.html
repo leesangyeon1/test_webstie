@@ -23,9 +23,10 @@
     body{
       margin:0;
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:linear-gradient(180deg,var(--bg),#070b14 70%);
+      background:#060010;
       color:var(--txt);
       padding-top:var(--header-h); /* 고정 헤더 높이만큼 여백 */
+      position:relative;
     }
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
@@ -107,6 +108,28 @@
     @media (prefers-reduced-motion: reduce){
       .reveal{opacity:1;transform:none;transition:none}
     }
+
+    #laserflow-background{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      overflow:hidden;
+      background:radial-gradient(circle at top, rgba(96,165,250,0.15), transparent 60%);
+    }
+    #laserflow-background .laser-flow-container{
+      width:100%;
+      height:100%;
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+    #laserflow-background canvas{
+      width:100%;
+      height:100%;
+      display:block;
+      pointer-events:none;
+    }
   </style>
 
   <script type="application/ld+json">
@@ -122,6 +145,7 @@
   </script>
 </head>
 <body>
+  <div id="laserflow-background" aria-hidden="true"></div>
   <header id="top">
     <div class="wrap container">
       <div class="brand">
@@ -387,5 +411,6 @@
       });
     }
   </script>
+  <script type="module" src="./laser-flow.js"></script>
 </body>
 </html>
