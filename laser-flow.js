@@ -290,8 +290,6 @@ class LaserFlowBackground {
     this.fpsSamples = [];
     this.lastFpsCheck = performance.now();
     this.emaDt = 16.7;
-    this.spotVisible = false;
-    this.baseSpotStrength = 0.65;
 
     this.handleVisibility = this.handleVisibility.bind(this);
     this.onContextLost = this.onContextLost.bind(this);
@@ -307,12 +305,6 @@ class LaserFlowBackground {
     mount.className = 'laser-flow-container';
     this.mount = mount;
     this.container.appendChild(mount);
-
-    const style = window.getComputedStyle(this.container);
-    const baseStrength = parseFloat(style.getPropertyValue('--lf-spot-strength'));
-    if (!Number.isNaN(baseStrength) && baseStrength > 0) {
-      this.baseSpotStrength = baseStrength;
-    }
 
     const renderer = new THREE.WebGLRenderer({
       antialias: false,
@@ -397,7 +389,6 @@ class LaserFlowBackground {
     this.setColor(this.options.color);
 
     this.setSizeNow();
-    this.hideSpot();
 
     this.resizeObserver = new ResizeObserver(() => this.scheduleResize());
     this.resizeObserver.observe(this.container);
@@ -416,7 +407,6 @@ class LaserFlowBackground {
     const pointerHandler = ev => this.updatePointer(ev.clientX, ev.clientY);
     const leaveHandler = () => {
       this.mouseTarget.set(0, 0);
-      this.hideSpot();
     };
     window.addEventListener('pointermove', pointerHandler, { passive: true });
     window.addEventListener('pointerdown', pointerHandler, { passive: true });
@@ -460,41 +450,6 @@ class LaserFlowBackground {
     const ratio = this.currentDpr;
     const hb = this.rect.height * ratio;
     this.mouseTarget.set(x * ratio, hb - y * ratio);
-
-    const inside = x >= 0 && y >= 0 && x <= this.rect.width && y <= this.rect.height;
-    if (inside) {
-      const mx = (x / Math.max(1, this.rect.width)) * 100;
-      const my = (y / Math.max(1, this.rect.height)) * 100;
-      this.container.style.setProperty('--lf-mx', `${mx}%`);
-      this.container.style.setProperty('--lf-my', `${my}%`);
-      const maskX = Math.round(x);
-      const maskY = Math.round(y + this.rect.height * 0.28);
-      this.container.style.setProperty('--lf-mask-x', `${maskX}px`);
-      this.container.style.setProperty('--lf-mask-y', `${maskY}px`);
-      const normX = x / Math.max(1, this.rect.width) - 0.5;
-      const normY = y / Math.max(1, this.rect.height) - 0.5;
-      const dist = Math.hypot(normX * 1.05, normY * 1.2);
-      const boost = Math.max(0, 0.55 - dist * 1.05);
-      const strength = Math.min(this.baseSpotStrength + boost, this.baseSpotStrength + 0.35);
-      this.container.style.setProperty('--lf-spot-strength', strength.toFixed(3));
-      if (!this.spotVisible) {
-        this.container.style.setProperty('--lf-spot-opacity', '1');
-        this.spotVisible = true;
-      }
-    } else if (this.spotVisible) {
-      this.hideSpot();
-    }
-  }
-
-  hideSpot() {
-    if (!this.container) return;
-    this.container.style.setProperty('--lf-spot-opacity', '0');
-    this.container.style.setProperty('--lf-mx', '50%');
-    this.container.style.setProperty('--lf-my', '50%');
-    this.container.style.setProperty('--lf-spot-strength', this.baseSpotStrength.toString());
-    this.container.style.setProperty('--lf-mask-x', '-9999px');
-    this.container.style.setProperty('--lf-mask-y', '-9999px');
-    this.spotVisible = false;
   }
 
   handleVisibility() {
@@ -596,8 +551,6 @@ class LaserFlowBackground {
     window.removeEventListener('pointerout', this.pointerLeaveHandler);
     this.canvas?.removeEventListener('webglcontextlost', this.onContextLost);
     this.canvas?.removeEventListener('webglcontextrestored', this.onContextRestored);
-
-    this.hideSpot();
 
     this.geometry?.dispose();
     this.material?.dispose();
