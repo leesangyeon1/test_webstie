@@ -235,7 +235,7 @@ const defaultOptions = {
   wispDensity: 1,
   dpr: undefined,
   mouseSmoothTime: 0.0,
-  mouseTiltStrength: 0,
+  mouseTiltStrength: 0.01,
   horizontalBeamOffset: 0.1,
   verticalBeamOffset: 0.0,
   flowSpeed: 0.35,
@@ -404,6 +404,17 @@ class LaserFlowBackground {
     document.addEventListener('visibilitychange', this.handleVisibility, { passive: true });
     window.addEventListener('resize', this.onWindowResize, { passive: true });
 
+    const pointerHandler = ev => this.updatePointer(ev.clientX, ev.clientY);
+    const leaveHandler = () => {
+      this.mouseTarget.set(0, 0);
+    };
+    window.addEventListener('pointermove', pointerHandler, { passive: true });
+    window.addEventListener('pointerdown', pointerHandler, { passive: true });
+    window.addEventListener('pointerleave', leaveHandler, { passive: true });
+    window.addEventListener('pointerout', leaveHandler, { passive: true });
+    this.pointerHandler = pointerHandler;
+    this.pointerLeaveHandler = leaveHandler;
+
     canvas.addEventListener('webglcontextlost', this.onContextLost, false);
     canvas.addEventListener('webglcontextrestored', this.onContextRestored, false);
 
@@ -430,6 +441,15 @@ class LaserFlowBackground {
     this.renderer.setSize(w, h, false);
     this.uniforms.iResolution.value.set(w * pr, h * pr, pr);
     this.rect = this.canvas.getBoundingClientRect();
+  }
+
+  updatePointer(clientX, clientY) {
+    if (!this.rect) return;
+    const x = clientX - this.rect.left;
+    const y = clientY - this.rect.top;
+    const ratio = this.currentDpr;
+    const hb = this.rect.height * ratio;
+    this.mouseTarget.set(x * ratio, hb - y * ratio);
   }
 
   handleVisibility() {
@@ -507,8 +527,6 @@ class LaserFlowBackground {
       if (this.fade >= 1) this.hasFaded = true;
     }
 
-    this.mouseTarget.set(0, 0);
-
     const tau = Math.max(1e-3, this.options.mouseSmoothTime);
     const alpha = 1 - Math.exp(-cdt / tau);
     this.mouseSmooth.lerp(this.mouseTarget, alpha);
@@ -527,6 +545,10 @@ class LaserFlowBackground {
     document.removeEventListener('visibilitychange', this.handleVisibility);
     window.removeEventListener('resize', this.onWindowResize);
 
+    window.removeEventListener('pointermove', this.pointerHandler);
+    window.removeEventListener('pointerdown', this.pointerHandler);
+    window.removeEventListener('pointerleave', this.pointerLeaveHandler);
+    window.removeEventListener('pointerout', this.pointerLeaveHandler);
     this.canvas?.removeEventListener('webglcontextlost', this.onContextLost);
     this.canvas?.removeEventListener('webglcontextrestored', this.onContextRestored);
 
@@ -556,7 +578,7 @@ if (typeof window !== 'undefined') {
       flowStrength: 0.18,
       wispIntensity: 4.4,
       flowSpeed: 0.38,
-      mouseTiltStrength: 0,
+      mouseTiltStrength: 0.012,
     });
 
     window.__laserFlow = flow;

@@ -37,10 +37,9 @@ const flow = mountLaserFlow(container, {
   flowStrength: 0.18,
   wispIntensity: 4.4,
   flowSpeed: 0.38,
+  mouseTiltStrength: 0.012,
 });
 ```
-
-포인터 움직임에 따라 안개가 기울어지거나 빛이 강조되는 효과는 기본적으로 꺼 둔 상태입니다. 필요하다면 `mouseTiltStrength` 값을 0보다 크게 설정해 다시 활성화할 수 있습니다.
 
 필요 시 Three.js 를 직접 번들링 환경(예: React, Next.js)으로 옮길 수도 있으며, 이 경우 `import * as THREE from 'three';` 로 바꾼 뒤 프로젝트의 번들러가 해당 의존성을 처리하도록 설정하면 됩니다.
 
