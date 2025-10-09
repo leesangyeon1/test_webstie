@@ -460,6 +460,11 @@ class LaserFlowBackground {
       const my = (y / Math.max(1, this.rect.height)) * 100;
       this.container.style.setProperty('--lf-mx', `${mx}%`);
       this.container.style.setProperty('--lf-my', `${my}%`);
+      const normX = x / Math.max(1, this.rect.width) - 0.5;
+      const normY = y / Math.max(1, this.rect.height) - 0.5;
+      const dist = Math.hypot(normX * 1.1, normY * 1.3);
+      const strength = 1.05 + Math.max(0, 0.75 - dist * 1.4);
+      this.container.style.setProperty('--lf-spot-strength', strength.toFixed(3));
       if (!this.spotVisible) {
         this.container.style.setProperty('--lf-spot-opacity', '1');
         this.spotVisible = true;
@@ -474,6 +479,7 @@ class LaserFlowBackground {
     this.container.style.setProperty('--lf-spot-opacity', '0');
     this.container.style.setProperty('--lf-mx', '50%');
     this.container.style.setProperty('--lf-my', '50%');
+    this.container.style.setProperty('--lf-spot-strength', '1');
     this.spotVisible = false;
   }
 

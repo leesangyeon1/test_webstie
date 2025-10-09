@@ -115,25 +115,28 @@
       pointer-events:none;
       z-index:-1;
       overflow:hidden;
-      background:radial-gradient(circle at top, rgba(96,165,250,0.15), transparent 60%);
+      background:
+        radial-gradient(circle at 50% -10%, rgba(96,165,250,0.28), transparent 70%),
+        radial-gradient(circle at 50% 120%, rgba(148,163,255,0.16), transparent 65%),
+        #060010;
       --lf-mx:50%;
       --lf-my:50%;
       --lf-spot-opacity:0;
+      --lf-spot-strength:1;
     }
     #laserflow-background::after{
       content:"";
       position:absolute;
       inset:-20%;
       pointer-events:none;
-      background:radial-gradient(circle at var(--lf-mx) var(--lf-my),
-        rgba(255,121,198,0.18) 0%,
-        rgba(255,121,198,0.12) 20%,
-        rgba(24,6,48,0.08) 42%,
-        transparent 68%);
+      background:
+        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(255,255,255,0.35) 0%, rgba(255,214,246,0.26) 14%, rgba(255,121,198,0.22) 28%, rgba(48,12,96,0.16) 52%, rgba(12,2,32,0.08) 72%, transparent 88%),
+        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(88,28,135,0.28) 0%, transparent 55%);
       mix-blend-mode:screen;
-      opacity:var(--lf-spot-opacity);
-      transition:opacity .35s ease;
-      filter:blur(.5px);
+      opacity:calc(var(--lf-spot-opacity) * var(--lf-spot-strength));
+      transition:opacity .28s ease;
+      filter:blur(.65px);
+      transform:translate3d(0,0,0);
     }
     #laserflow-background .laser-flow-container{
       width:100%;
