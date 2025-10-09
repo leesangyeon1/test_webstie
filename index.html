@@ -117,13 +117,13 @@
       z-index:0;
       overflow:hidden;
       background:
-        radial-gradient(circle at 50% -10%, rgba(96,165,250,0.28), transparent 70%),
-        radial-gradient(circle at 50% 120%, rgba(148,163,255,0.16), transparent 65%),
+        radial-gradient(circle at 50% -10%, rgba(96,165,250,0.22), transparent 70%),
+        radial-gradient(circle at 50% 115%, rgba(148,163,255,0.12), transparent 62%),
         #060010;
       --lf-mx:50%;
       --lf-my:50%;
       --lf-spot-opacity:0;
-      --lf-spot-strength:1;
+      --lf-spot-strength:0.65;
       --lf-mask-x:-9999px;
       --lf-mask-y:-9999px;
     }
@@ -133,12 +133,12 @@
       inset:-20%;
       pointer-events:none;
       background:
-        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(255,255,255,0.35) 0%, rgba(255,214,246,0.26) 14%, rgba(255,121,198,0.22) 28%, rgba(48,12,96,0.16) 52%, rgba(12,2,32,0.08) 72%, transparent 88%),
-        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(88,28,135,0.28) 0%, transparent 55%);
+        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(255,255,255,0.22) 0%, rgba(255,214,246,0.16) 18%, rgba(255,121,198,0.14) 36%, rgba(48,12,96,0.12) 56%, rgba(12,2,32,0.05) 78%, transparent 90%),
+        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(88,28,135,0.18) 0%, transparent 50%);
       mix-blend-mode:screen;
       opacity:calc(var(--lf-spot-opacity) * var(--lf-spot-strength));
       transition:opacity .28s ease;
-      filter:blur(.65px);
+      filter:blur(.55px);
       transform:translate3d(0,0,0);
     }
     #laserflow-background .laserflow-reveal{
@@ -148,9 +148,9 @@
       height:100%;
       object-fit:cover;
       pointer-events:none;
-      mix-blend-mode:screen;
-      opacity:calc(.82 * var(--lf-spot-opacity) * var(--lf-spot-strength));
-      filter:saturate(120%) contrast(108%);
+      mix-blend-mode:lighten;
+      opacity:calc(.6 * var(--lf-spot-opacity) * var(--lf-spot-strength));
+      filter:saturate(110%) contrast(104%) brightness(.9);
       transition:opacity .3s ease;
       -webkit-mask-image:radial-gradient(circle at var(--lf-mask-x) var(--lf-mask-y), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.3) 180px, rgba(255,255,255,0) 240px);
       mask-image:radial-gradient(circle at var(--lf-mask-x) var(--lf-mask-y), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.3) 180px, rgba(255,255,255,0) 240px);

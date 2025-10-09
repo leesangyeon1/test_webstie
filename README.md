@@ -33,13 +33,17 @@ const flow = mountLaserFlow(container, {
   color: '#FF79C6',
   horizontalBeamOffset: 0.08,
   verticalBeamOffset: -0.05,
-  fogIntensity: 0.5,
-  flowSpeed: 0.4,
-  mouseTiltStrength: 0.015,
+  fogIntensity: 0.36,
+  flowStrength: 0.18,
+  wispIntensity: 4.4,
+  flowSpeed: 0.38,
+  mouseTiltStrength: 0.012,
 });
 ```
 
 필요 시 Three.js 를 직접 번들링 환경(예: React, Next.js)으로 옮길 수도 있으며, 이 경우 `import * as THREE from 'three';` 로 바꾼 뒤 프로젝트의 번들러가 해당 의존성을 처리하도록 설정하면 됩니다.
+
+고정 배경 컨테이너는 `laserflow-silhouette.svg` 를 노출 마스크로 사용하며, CSS 변수 `--lf-spot-strength`(기본 0.65)와 `--lf-spot-opacity`를 통해 커서 스포트라이트 밝기를 제어합니다. 사이트에 맞는 실루엣 이미지를 쓰고 싶다면 `<img class="laserflow-reveal" ...>` 경로만 교체하면 됩니다.
 
 ## 5. 퍼포먼스 참고
 스크립트는 750ms 간격으로 FPS 를 샘플링하면서 기기 성능에 따라 DPR(픽셀 비율)을 자동으로 조절합니다. 성능이 낮은 기기에서는 자동으로 해상도를 낮춰 부드러움을 유지하고, 숨겨진 탭에서는 렌더링을 일시 중지하여 리소스를 절약합니다.

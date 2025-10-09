@@ -241,11 +241,11 @@ const defaultOptions = {
   flowSpeed: 0.35,
   verticalSizing: 2.0,
   horizontalSizing: 0.5,
-  fogIntensity: 0.45,
+  fogIntensity: 0.38,
   fogScale: 0.3,
   wispSpeed: 15.0,
-  wispIntensity: 5.0,
-  flowStrength: 0.25,
+  wispIntensity: 4.2,
+  flowStrength: 0.2,
   decay: 1.1,
   falloffStart: 1.2,
   fogFallSpeed: 0.6,
@@ -291,6 +291,7 @@ class LaserFlowBackground {
     this.lastFpsCheck = performance.now();
     this.emaDt = 16.7;
     this.spotVisible = false;
+    this.baseSpotStrength = 0.65;
 
     this.handleVisibility = this.handleVisibility.bind(this);
     this.onContextLost = this.onContextLost.bind(this);
@@ -306,6 +307,12 @@ class LaserFlowBackground {
     mount.className = 'laser-flow-container';
     this.mount = mount;
     this.container.appendChild(mount);
+
+    const style = window.getComputedStyle(this.container);
+    const baseStrength = parseFloat(style.getPropertyValue('--lf-spot-strength'));
+    if (!Number.isNaN(baseStrength) && baseStrength > 0) {
+      this.baseSpotStrength = baseStrength;
+    }
 
     const renderer = new THREE.WebGLRenderer({
       antialias: false,
@@ -461,13 +468,14 @@ class LaserFlowBackground {
       this.container.style.setProperty('--lf-mx', `${mx}%`);
       this.container.style.setProperty('--lf-my', `${my}%`);
       const maskX = Math.round(x);
-      const maskY = Math.round(y + this.rect.height * 0.35);
+      const maskY = Math.round(y + this.rect.height * 0.28);
       this.container.style.setProperty('--lf-mask-x', `${maskX}px`);
       this.container.style.setProperty('--lf-mask-y', `${maskY}px`);
       const normX = x / Math.max(1, this.rect.width) - 0.5;
       const normY = y / Math.max(1, this.rect.height) - 0.5;
-      const dist = Math.hypot(normX * 1.1, normY * 1.3);
-      const strength = Math.min(1.6, 1.05 + Math.max(0, 0.75 - dist * 1.4));
+      const dist = Math.hypot(normX * 1.05, normY * 1.2);
+      const boost = Math.max(0, 0.55 - dist * 1.05);
+      const strength = Math.min(this.baseSpotStrength + boost, this.baseSpotStrength + 0.35);
       this.container.style.setProperty('--lf-spot-strength', strength.toFixed(3));
       if (!this.spotVisible) {
         this.container.style.setProperty('--lf-spot-opacity', '1');
@@ -483,7 +491,7 @@ class LaserFlowBackground {
     this.container.style.setProperty('--lf-spot-opacity', '0');
     this.container.style.setProperty('--lf-mx', '50%');
     this.container.style.setProperty('--lf-my', '50%');
-    this.container.style.setProperty('--lf-spot-strength', '1');
+    this.container.style.setProperty('--lf-spot-strength', this.baseSpotStrength.toString());
     this.container.style.setProperty('--lf-mask-x', '-9999px');
     this.container.style.setProperty('--lf-mask-y', '-9999px');
     this.spotVisible = false;
@@ -613,9 +621,11 @@ if (typeof window !== 'undefined') {
       color: '#FF79C6',
       horizontalBeamOffset: 0.08,
       verticalBeamOffset: -0.05,
-      fogIntensity: 0.5,
-      flowSpeed: 0.4,
-      mouseTiltStrength: 0.015,
+      fogIntensity: 0.36,
+      flowStrength: 0.18,
+      wispIntensity: 4.4,
+      flowSpeed: 0.38,
+      mouseTiltStrength: 0.012,
     });
 
     window.__laserFlow = flow;
