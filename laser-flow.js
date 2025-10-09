@@ -290,6 +290,7 @@ class LaserFlowBackground {
     this.fpsSamples = [];
     this.lastFpsCheck = performance.now();
     this.emaDt = 16.7;
+    this.spotVisible = false;
 
     this.handleVisibility = this.handleVisibility.bind(this);
     this.onContextLost = this.onContextLost.bind(this);
@@ -389,6 +390,7 @@ class LaserFlowBackground {
     this.setColor(this.options.color);
 
     this.setSizeNow();
+    this.hideSpot();
 
     this.resizeObserver = new ResizeObserver(() => this.scheduleResize());
     this.resizeObserver.observe(this.container);
@@ -405,7 +407,10 @@ class LaserFlowBackground {
     window.addEventListener('resize', this.onWindowResize, { passive: true });
 
     const pointerHandler = ev => this.updatePointer(ev.clientX, ev.clientY);
-    const leaveHandler = () => this.mouseTarget.set(0, 0);
+    const leaveHandler = () => {
+      this.mouseTarget.set(0, 0);
+      this.hideSpot();
+    };
     window.addEventListener('pointermove', pointerHandler, { passive: true });
     window.addEventListener('pointerdown', pointerHandler, { passive: true });
     window.addEventListener('pointerleave', leaveHandler, { passive: true });
@@ -466,7 +471,7 @@ class LaserFlowBackground {
 
   adjustDpr(now) {
     const elapsed = now - this.lastFpsCheck;
-    if (elapsed < 750) return;
+    if (elapsed < 1500) return;
     if (this.fpsSamples.length === 0) {
       this.lastFpsCheck = now;
       return;
@@ -475,7 +480,7 @@ class LaserFlowBackground {
     const avgFps = this.fpsSamples.reduce((acc, v) => acc + v, 0) / this.fpsSamples.length;
 
     const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-    const dprFloor = 0.6;
+    const dprFloor = 0.65;
     const lowerThresh = 50;
     const upperThresh = 58;
 
@@ -488,7 +493,7 @@ class LaserFlowBackground {
       next = clamp(this.currentDpr * 1.05, dprFloor, base);
     }
 
-    if (Math.abs(next - this.currentDpr) > 0.01) {
+    if (Math.abs(next - this.currentDpr) > 0.15) {
       this.currentDpr = next;
       this.setSizeNow();
     }
@@ -549,6 +554,8 @@ class LaserFlowBackground {
     window.removeEventListener('pointerout', this.pointerLeaveHandler);
     this.canvas?.removeEventListener('webglcontextlost', this.onContextLost);
     this.canvas?.removeEventListener('webglcontextrestored', this.onContextRestored);
+
+    this.hideSpot();
 
     this.geometry?.dispose();
     this.material?.dispose();
