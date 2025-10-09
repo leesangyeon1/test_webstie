@@ -23,9 +23,11 @@
     body{
       margin:0;
       font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:linear-gradient(180deg,var(--bg),#070b14 70%);
+      background-color:#060010;
+      background-image:linear-gradient(180deg,var(--bg),#070b14 70%);
       color:var(--txt);
       padding-top:var(--header-h); /* 고정 헤더 높이만큼 여백 */
+      position:relative;
     }
     a{color:var(--acc);text-decoration:none}
     a:hover{text-decoration:underline}
@@ -107,6 +109,67 @@
     @media (prefers-reduced-motion: reduce){
       .reveal{opacity:1;transform:none;transition:none}
     }
+
+    #laserflow-background{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% -10%, rgba(96,165,250,0.28), transparent 70%),
+        radial-gradient(circle at 50% 120%, rgba(148,163,255,0.16), transparent 65%),
+        #060010;
+      --lf-mx:50%;
+      --lf-my:50%;
+      --lf-spot-opacity:0;
+      --lf-spot-strength:1;
+      --lf-mask-x:-9999px;
+      --lf-mask-y:-9999px;
+    }
+    #laserflow-background::after{
+      content:"";
+      position:absolute;
+      inset:-20%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(255,255,255,0.35) 0%, rgba(255,214,246,0.26) 14%, rgba(255,121,198,0.22) 28%, rgba(48,12,96,0.16) 52%, rgba(12,2,32,0.08) 72%, transparent 88%),
+        radial-gradient(circle at var(--lf-mx) var(--lf-my), rgba(88,28,135,0.28) 0%, transparent 55%);
+      mix-blend-mode:screen;
+      opacity:calc(var(--lf-spot-opacity) * var(--lf-spot-strength));
+      transition:opacity .28s ease;
+      filter:blur(.65px);
+      transform:translate3d(0,0,0);
+    }
+    #laserflow-background .laserflow-reveal{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      opacity:calc(.82 * var(--lf-spot-opacity) * var(--lf-spot-strength));
+      filter:saturate(120%) contrast(108%);
+      transition:opacity .3s ease;
+      -webkit-mask-image:radial-gradient(circle at var(--lf-mask-x) var(--lf-mask-y), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.3) 180px, rgba(255,255,255,0) 240px);
+      mask-image:radial-gradient(circle at var(--lf-mask-x) var(--lf-mask-y), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.3) 180px, rgba(255,255,255,0) 240px);
+      -webkit-mask-repeat:no-repeat;
+      mask-repeat:no-repeat;
+    }
+    #laserflow-background .laser-flow-container{
+      width:100%;
+      height:100%;
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+    #laserflow-background canvas{
+      width:100%;
+      height:100%;
+      display:block;
+      pointer-events:none;
+    }
   </style>
 
   <script type="application/ld+json">
@@ -122,6 +185,9 @@
   </script>
 </head>
 <body>
+  <div id="laserflow-background" aria-hidden="true">
+    <img class="laserflow-reveal" src="Assets/Images/laserflow-silhouette.svg" alt="" loading="lazy" decoding="async" />
+  </div>
   <header id="top">
     <div class="wrap container">
       <div class="brand">
@@ -387,5 +453,6 @@
       });
     }
   </script>
+  <script type="module" src="./laser-flow.js"></script>
 </body>
 </html>
