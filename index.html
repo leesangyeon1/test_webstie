@@ -114,7 +114,7 @@
       position:fixed;
       inset:0;
       pointer-events:none;
-      z-index:-1;
+      z-index:0;
       overflow:hidden;
       background:
         radial-gradient(circle at 50% -10%, rgba(96,165,250,0.28), transparent 70%),
@@ -124,6 +124,8 @@
       --lf-my:50%;
       --lf-spot-opacity:0;
       --lf-spot-strength:1;
+      --lf-mask-x:-9999px;
+      --lf-mask-y:-9999px;
     }
     #laserflow-background::after{
       content:"";
@@ -138,6 +140,22 @@
       transition:opacity .28s ease;
       filter:blur(.65px);
       transform:translate3d(0,0,0);
+    }
+    #laserflow-background .laserflow-reveal{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      pointer-events:none;
+      mix-blend-mode:screen;
+      opacity:calc(.82 * var(--lf-spot-opacity) * var(--lf-spot-strength));
+      filter:saturate(120%) contrast(108%);
+      transition:opacity .3s ease;
+      -webkit-mask-image:radial-gradient(circle at var(--lf-mask-x) var(--lf-mask-y), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.3) 180px, rgba(255,255,255,0) 240px);
+      mask-image:radial-gradient(circle at var(--lf-mask-x) var(--lf-mask-y), rgba(255,255,255,1) 0px, rgba(255,255,255,0.95) 60px, rgba(255,255,255,0.6) 120px, rgba(255,255,255,0.3) 180px, rgba(255,255,255,0) 240px);
+      -webkit-mask-repeat:no-repeat;
+      mask-repeat:no-repeat;
     }
     #laserflow-background .laser-flow-container{
       width:100%;
@@ -167,7 +185,9 @@
   </script>
 </head>
 <body>
-  <div id="laserflow-background" aria-hidden="true"></div>
+  <div id="laserflow-background" aria-hidden="true">
+    <img class="laserflow-reveal" src="Assets/Images/laserflow-silhouette.svg" alt="" loading="lazy" decoding="async" />
+  </div>
   <header id="top">
     <div class="wrap container">
       <div class="brand">
