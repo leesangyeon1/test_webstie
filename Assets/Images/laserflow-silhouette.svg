@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="beam" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#19002f" stop-opacity="0" />
+      <stop offset="0.3" stop-color="#44116a" stop-opacity="0.5" />
+      <stop offset="0.6" stop-color="#8921aa" stop-opacity="0.85" />
+      <stop offset="1" stop-color="#2b0345" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="pulse" cx="0.5" cy="0.5" r="0.6">
+      <stop offset="0" stop-color="#ffe5ff" stop-opacity="0.85" />
+      <stop offset="0.4" stop-color="#ff7ecf" stop-opacity="0.55" />
+      <stop offset="0.85" stop-color="#090214" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="silhouette" cx="0.5" cy="0.45" r="0.62">
+      <stop offset="0" stop-color="#e9f1ff" stop-opacity="0.62" />
+      <stop offset="0.4" stop-color="#9db8ff" stop-opacity="0.28" />
+      <stop offset="0.72" stop-color="#1b0a30" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="#070014" />
+  <g opacity="0.8">
+    <ellipse cx="800" cy="450" rx="980" ry="360" fill="url(#beam)" />
+    <ellipse cx="800" cy="360" rx="620" ry="260" fill="url(#pulse)" opacity="0.65" />
+  </g>
+  <g fill="#fff" opacity="0.62">
+    <path d="M725 520c-24-52-18-118 18-164s98-72 150-58c29 8 55 28 71 54 21 36 24 82 8 120-16 40-52 70-92 82-18 6-38 8-57 6-30-4-58-20-78-40-8-8-15-18-20-28z" opacity="0.35"/>
+    <path d="M676 575c12-34 45-58 81-65 42-8 87 6 120 33 28 23 46 55 50 90 1 11 1 23-2 34-4 14-13 27-24 37-19 18-45 27-71 29-45 4-94-15-122-50-26-32-32-80-12-108z" opacity="0.38"/>
+  </g>
+  <g fill="url(#silhouette)" opacity="0.85">
+    <path d="M927 442c14 38 12 82-6 120-20 42-60 74-105 85-34 8-71 3-103-14-46-24-79-72-83-125-3-32 5-65 21-93 24-40 65-69 111-76 39-6 80 5 112 29 20 15 36 35 47 58 2 4 4 10 6 16z" />
+    <path d="M1018 605c21 32 24 74 9 109-13 30-38 55-69 67-42 17-91 12-129-13-40-26-67-72-68-120 0-36 15-72 40-98 24-24 56-40 90-43 42-4 85 12 114 43 5 5 9 10 13 15z" />
+  </g>
+  <g stroke="#ffc2ff" stroke-width="2" stroke-linecap="round" opacity="0.35">
+    <path d="M240 300c180 80 360 120 560 120s380-40 560-120" opacity="0.4" />
+    <path d="M280 660c150-60 300-90 520-90s370 30 520 90" opacity="0.32" />
+  </g>
+</svg>
